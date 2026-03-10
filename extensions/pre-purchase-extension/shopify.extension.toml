@@ -44,9 +44,15 @@ api_access = true
 # your extension. Learn more:
 # https://shopify.dev/docs/api/checkout-ui-extensions/latest/configuration#settings-definition
 
-# [extensions.settings]
-# [[extensions.settings.fields]]
-# key = "banner_title"
-# type = "single_line_text_field"
-# name = "Banner title"
-# description = "Enter a title for the banner"
+[extensions.settings]
+[[extensions.settings.fields]]
+key = "headline"
+type = "single_line_text_field"
+name = "Headline"
+description = "Enter a Headline"
+
+[[extensions.settings.fields]]
+key = "product_handle"
+type = "single_line_text_field"
+name = "Product handle"
+description = "Enter the product handle (e.g. my-awesome-product)"

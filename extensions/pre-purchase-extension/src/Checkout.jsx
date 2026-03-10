@@ -2,6 +2,7 @@ import "@shopify/ui-extensions/preact";
 import { render } from "preact";
 import { useEffect, useState } from "preact/hooks";
 
+
 export default function () {
   render(<Extension />, document.body);
 }
@@ -13,8 +14,12 @@ function Extension() {
   const [processing, setProcessing] = useState(false);
   const [showError, setShowError] = useState(false);
 
+
+  const bannerTitle = shopify.settings.value.headline ?? 'Priority & Insured Shipping';
+  const featuredHandle = shopify.settings.value.product_handle ?? 'priority-insured-shipping';
+
   useEffect(() => {
-    fetchProductByHandle("shipping-protection-2");
+    fetchProductByHandle(featuredHandle);
   }, []);
 
   useEffect(() => {
@@ -112,6 +117,7 @@ function Extension() {
 
   return (
     <ProductOffer
+      bannerTitle={bannerTitle}
       product={product}
       i18n={i18n}
       processing={processing}
@@ -149,6 +155,7 @@ function LoadingSkeleton() {
 }
 
 function ProductOffer({
+  bannerTitle,
   product,
   i18n,
   processing,
@@ -172,26 +179,14 @@ function ProductOffer({
   }
 
   return (
-    <s-stack gap="large-200" padding="base">
-      <s-divider />
+    <s-stack gap="large-200" paddingBlockStart="small-100">
+      <s-heading>{bannerTitle}</s-heading>
       <s-grid
+        border="base"
+        borderRadius="base"
+        padding="base"
         gap="base"
-        gridTemplateColumns="1fr auto"
-        alignItems="start"
-      >
-        <s-text type="strong">
-          Add Insurance to your order? Just {price} extra!
-        </s-text>
-        <s-checkbox
-          checked={isInCart}
-          onChange={handleToggle}
-          disabled={processing}
-        />
-      </s-grid>
-
-      <s-grid
-        gap="base"
-        gridTemplateColumns="50px 1fr"
+        gridTemplateColumns="1fr 6fr auto"
         alignItems="start"
       >
         <s-image
@@ -199,11 +194,19 @@ function ProductOffer({
           aspectRatio="1"
           borderRadius="small-100"
           alt={title}
+          inlineSize="fill"
         />
-        <s-stack gap="extra-tight">
+        <s-stack>
           <s-text type="strong">{title}</s-text>
-          <s-text size="small">{description}</s-text>
+          <s-text>{description}</s-text>
         </s-stack>
+
+        <s-checkbox
+          checked={isInCart}
+          onChange={handleToggle}
+          disabled={processing}
+        />
+
       </s-grid>
 
       {showError && <ErrorBanner />}
