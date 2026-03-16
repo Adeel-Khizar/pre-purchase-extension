@@ -27,6 +27,9 @@ function Extension() {
   const triggerHandlesSetting =
     shopify?.settings?.value?.trigger_product_handles || "natures-roots-lymphatic-drops™";
 
+  const autoAddEnabled =
+    shopify?.settings?.value?.auto_add_shipping ?? true;
+
   //console.log("Customizer handles raw:", triggerHandlesSetting);
 
   const triggerHandles = [
@@ -210,12 +213,13 @@ function Extension() {
       isInCart,
       processing,
     });
+    if (!autoAddEnabled) return;
 
     if (product && !isInCart && !processing) {
       //console.log("Adding shipping product to cart");
       handleAddToCart(variantId);
     }
-  }, [product, isInCart]);
+  }, [product, isInCart, autoAddEnabled]);
 
   /* ---------------- UI ---------------- */
 

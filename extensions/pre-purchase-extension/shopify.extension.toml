@@ -46,6 +46,12 @@ api_access = true
 
 [extensions.settings]
 [[extensions.settings.fields]]
+key = "auto_add_shipping"
+type = "boolean"
+name = "Auto add shipping product"
+default = true
+
+[[extensions.settings.fields]]
 key = "headline"
 type = "single_line_text_field"
 name = "Headline"
