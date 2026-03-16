@@ -52,7 +52,19 @@ name = "Headline"
 description = "Enter a Headline"
 
 [[extensions.settings.fields]]
+key = "product_headline"
+type = "single_line_text_field"
+name = "Product Headline"
+description = "Enter a Product Headline"
+
+[[extensions.settings.fields]]
 key = "product_handle"
 type = "single_line_text_field"
 name = "Product handle"
 description = "Enter the product handle (e.g. my-awesome-product)"
+
+[[extensions.settings.fields]]
+key = "trigger_product_handles"
+type = "single_line_text_field"
+name = "Trigger Product Handles"
+description = "Comma separated handles. If any of these products are in cart, the offer will show."
